@@ -1,12 +1,20 @@
-export default function Visibility( { weather, unit, showVisibility } ) {
-	if ( ! weather || ! showVisibility ) return null;
+import React from 'react';
+import { WeatherContext } from '../Weather';
 
-	let visibility;
-	if ( 'metric' === unit ) {
-		visibility = `${ weather.vis_km } km`;
-	} else {
-		visibility = `${ weather.vis_miles } miles`;
-	}
+export default function Visibility() {
+	const { weather, unit, showVisibility } = React.useContext(
+		WeatherContext
+	);
+	const [ weatherValue ] = weather;
+	const [ unitValue ] = unit;
+	const [ showVisibilityValue ] = showVisibility;
+
+	if ( ! weatherValue || ! showVisibilityValue ) return null;
+
+	const visibility =
+		'metric' === unitValue
+			? `${ weatherValue.vis_km } km`
+			: `${ weatherValue.vis_miles } miles`;
 
 	return (
 		<tr>

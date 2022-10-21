@@ -1,3 +1,9 @@
-export default function City( { city } ) {
-	return <h1 align="center">{ city }</h1>;
+import React from 'react';
+import { WeatherContext } from '../Weather';
+
+export default function City() {
+	const { city } = React.useContext( WeatherContext );
+	const [ cityValue ] = city;
+
+	return <h1 align="center">{ cityValue }</h1>;
 }

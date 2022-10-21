@@ -8,45 +8,21 @@ import Pressure from './DataFields/Pressure';
 import Visibility from './DataFields/Visibility';
 import UV from './DataFields/UV';
 
-export default function WeatherData( {
-	weather,
-	city,
-	unit,
-	showWind,
-	showHumidity,
-	showPressure,
-	showVisibility,
-	showUvIndex,
-} ) {
+export default function WeatherData() {
 	return (
 		<>
-			<City city={ city } />
-			<Icon weather={ weather } />
-			<Condition weather={ weather } />
-			<Temperature weather={ weather } unit={ unit } />
+			<City />
+			<Icon />
+			<Condition />
+			<Temperature />
 
 			<table>
 				<tbody>
-					<Wind
-						weather={ weather }
-						unit={ unit }
-						showWind={ showWind }
-					/>
-					<Humidity
-						weather={ weather }
-						showHumidity={ showHumidity }
-					/>
-					<Pressure
-						weather={ weather }
-						unit={ unit }
-						showPressure={ showPressure }
-					/>
-					<Visibility
-						weather={ weather }
-						unit={ unit }
-						showVisibility={ showVisibility }
-					/>
-					<UV weather={ weather } showUvIndex={ showUvIndex } />
+					<Wind />
+					<Humidity />
+					<Pressure />
+					<Visibility />
+					<UV />
 				</tbody>
 			</table>
 		</>

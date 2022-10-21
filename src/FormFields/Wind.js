@@ -1,12 +1,18 @@
-export default function Wind( { showWind, setShowWind } ) {
+import React from 'react';
+import { WeatherContext } from '../Weather';
+
+export default function Wind() {
+	const { showWind } = React.useContext( WeatherContext );
+	const [ showWindValue, setShowWindValue ] = showWind;
+
 	return (
 		<label htmlFor="wind">
 			<input
 				type="checkbox"
 				id="wind"
-				checked={ showWind }
+				checked={ showWindValue }
 				onChange={ ( event ) => {
-					setShowWind( event.target.checked );
+					setShowWindValue( event.target.checked );
 				} }
 			/>
 			Show wind

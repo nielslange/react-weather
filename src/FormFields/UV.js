@@ -1,12 +1,18 @@
-export default function UV( { showUvIndex, setShowUvIndex } ) {
+import React from 'react';
+import { WeatherContext } from '../Weather';
+
+export default function UV() {
+	const { showUvIndex } = React.useContext( WeatherContext );
+	const [ showUvIndexValue, setShowUvIndexValue ] = showUvIndex;
+
 	return (
 		<label htmlFor="uv">
 			<input
 				type="checkbox"
 				id="uv"
-				checked={ showUvIndex }
+				checked={ showUvIndexValue }
 				onChange={ ( event ) => {
-					setShowUvIndex( event.target.checked );
+					setShowUvIndexValue( event.target.checked );
 				} }
 			/>
 			Show UV index

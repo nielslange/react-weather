@@ -1,5 +1,11 @@
-export default function Condition( { weather } ) {
-	if ( ! weather ) return null;
+import React from 'react';
+import { WeatherContext } from '../Weather';
 
-	return <p align="center">{ weather.condition.text }</p>;
+export default function Condition() {
+	const { weather } = React.useContext( WeatherContext );
+	const [ weatherValue ] = weather;
+
+	if ( ! weatherValue ) return null;
+
+	return <p align="center">{ weatherValue.condition.text }</p>;
 }
