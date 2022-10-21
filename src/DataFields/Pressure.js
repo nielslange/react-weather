@@ -1,12 +1,18 @@
-export default function Pressure( { weather, unit, showPressure } ) {
-	if ( ! weather || ! showPressure ) return null;
+import React from 'react';
+import { WeatherContext } from '../Weather';
 
-	let pressure;
-	if ( 'metric' === unit ) {
-		pressure = `${ weather.pressure_mb } millibars`;
-	} else {
-		pressure = `${ weather.pressure_in } inches`;
-	}
+export default function Pressure() {
+	const { weather, unit, showPressure } = React.useContext( WeatherContext );
+	const [ weatherValue ] = weather;
+	const [ unitValue ] = unit;
+	const [ showPressureValue ] = showPressure;
+
+	if ( ! weatherValue || ! showPressureValue ) return null;
+
+	const pressure =
+		'metric' === unitValue
+			? `${ weatherValue.pressure_mb } millibars`
+			: `${ weatherValue.pressure_in } inches`;
 
 	return (
 		<tr>

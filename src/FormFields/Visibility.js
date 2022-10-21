@@ -1,12 +1,18 @@
-export default function Visibility( { showVisibility, setShowVisibility } ) {
+import React from 'react';
+import { WeatherContext } from '../Weather';
+
+export default function Visibility() {
+	const { showVisibility } = React.useContext( WeatherContext );
+	const [ showVisibilityValue, setShowVisibilityValue ] = showVisibility;
+
 	return (
 		<label htmlFor="visibility">
 			<input
 				type="checkbox"
 				id="visibility"
-				checked={ showVisibility }
+				checked={ showVisibilityValue }
 				onChange={ ( event ) => {
-					setShowVisibility( event.target.checked );
+					setShowVisibilityValue( event.target.checked );
 				} }
 			/>
 			Show visibility

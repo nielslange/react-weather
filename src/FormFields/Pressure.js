@@ -1,12 +1,18 @@
-export default function Pressure( { showPressure, setShowPressure } ) {
+import React from 'react';
+import { WeatherContext } from '../Weather';
+
+export default function Pressure() {
+	const { showPressure } = React.useContext( WeatherContext );
+	const [ showPressureValue, setShowPressureValue ] = showPressure;
+
 	return (
 		<label htmlFor="pressure">
 			<input
 				type="checkbox"
 				id="pressure"
-				checked={ showPressure }
+				checked={ showPressureValue }
 				onChange={ ( event ) => {
-					setShowPressure( event.target.checked );
+					setShowPressureValue( event.target.checked );
 				} }
 			/>
 			Show pressure

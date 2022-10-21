@@ -1,12 +1,18 @@
-export default function Wind( { weather, unit, showWind } ) {
-	if ( ! weather || ! showWind ) return null;
+import React from 'react';
+import { WeatherContext } from '../Weather';
 
-	let wind;
-	if ( 'metric' === unit ) {
-		wind = `${ weather.wind_kph } km/h`;
-	} else {
-		wind = `${ weather.wind_mph } miles/h`;
-	}
+export default function Wind() {
+	const { weather, unit, showWind } = React.useContext( WeatherContext );
+	const [ weatherValue ] = weather;
+	const [ unitValue ] = unit;
+	const [ showWindValue ] = showWind;
+
+	if ( ! weatherValue || ! showWindValue ) return null;
+
+	const wind =
+		'metric' === unitValue
+			? `${ weatherValue.wind_kph } km/h`
+			: `${ weatherValue.wind_mph } miles/h`;
 
 	return (
 		<tr>

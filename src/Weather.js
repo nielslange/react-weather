@@ -1,7 +1,10 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
+import { useState, useEffect, createContext } from 'react';
 import env from 'react-dotenv';
 import WeatherData from './WeatherData';
 import WeatherForm from './WeatherForm';
+
+export const WeatherContext = createContext();
 
 export default function Weather() {
 	const [ weather, setWeather ] = useState();
@@ -13,6 +16,18 @@ export default function Weather() {
 	const [ showUvIndex, setShowUvIndex ] = useState( true );
 	const [ showVisibility, setShowVisibility ] = useState( true );
 	const [ showWind, setShowWind ] = useState( true );
+
+	const WeatherContextValue = {
+		weather: [ weather ],
+		query: [ query, setQuery ],
+		city: [ city, setCity ],
+		unit: [ unit, setUnit ],
+		showHumidity: [ showHumidity, setShowHumidity ],
+		showPressure: [ showPressure, setShowPressure ],
+		showUvIndex: [ showUvIndex, setShowUvIndex ],
+		showVisibility: [ showVisibility, setShowVisibility ],
+		showWind: [ showWind, setShowWind ],
+	};
 
 	const appid = env.API_KEY;
 	const url = `http://api.weatherapi.com/v1/current.json?key=${ appid }&q=${ city }&aqi=no`;
@@ -26,38 +41,16 @@ export default function Weather() {
 
 	useEffect( () => {
 		getWeather();
-	}, [ query ] );
+	} );
+
+	console.table( WeatherContextValue );
 
 	return (
 		<div className="container">
-			<WeatherData
-				weather={ weather }
-				city={ city }
-				unit={ unit }
-				showHumidity={ showHumidity }
-				showPressure={ showPressure }
-				showUvIndex={ showUvIndex }
-				showVisibility={ showVisibility }
-				showWind={ showWind }
-			/>
-			<WeatherForm
-				query={ query }
-				setQuery={ setQuery }
-				city={ city }
-				setCity={ setCity }
-				unit={ unit }
-				setUnit={ setUnit }
-				showHumidity={ showHumidity }
-				setShowHumidity={ setShowHumidity }
-				showPressure={ showPressure }
-				setShowPressure={ setShowPressure }
-				showUvIndex={ showUvIndex }
-				setShowUvIndex={ setShowUvIndex }
-				showVisibility={ showVisibility }
-				setShowVisibility={ setShowVisibility }
-				showWind={ showWind }
-				setShowWind={ setShowWind }
-			/>
+			<WeatherContext.Provider value={ WeatherContextValue }>
+				<WeatherData />
+				<WeatherForm />
+			</WeatherContext.Provider>
 		</div>
 	);
 }

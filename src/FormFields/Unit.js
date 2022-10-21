@@ -1,10 +1,16 @@
-export default function Unit( { unit, setUnit } ) {
+import React from 'react';
+import { WeatherContext } from '../Weather';
+
+export default function Unit() {
+	const { unit } = React.useContext( WeatherContext );
+	const [ unitValue, setUnitValue ] = unit;
+
 	return (
 		<label htmlFor="unit">
 			Unit:
 			<select
-				onChange={ ( event ) => setUnit( event.target.value ) }
-				value={ unit }
+				onChange={ ( event ) => setUnitValue( event.target.value ) }
+				value={ unitValue }
 			>
 				<option value="metric">Metric</option>
 				<option value="imperial">Imperial</option>

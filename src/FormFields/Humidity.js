@@ -1,12 +1,18 @@
-export default function Humidity( { showHumidity, setShowHumidity } ) {
+import React from 'react';
+import { WeatherContext } from '../Weather';
+
+export default function Humidity() {
+	const { showHumidity } = React.useContext( WeatherContext );
+	const [ showHumidityValue, setShowHumidityValue ] = showHumidity;
+
 	return (
 		<label htmlFor="humidity">
 			<input
 				type="checkbox"
 				id="humidity"
-				checked={ showHumidity }
+				checked={ showHumidityValue }
 				onChange={ ( event ) => {
-					setShowHumidity( event.target.checked );
+					setShowHumidityValue( event.target.checked );
 				} }
 			/>
 			Show humidity
