@@ -41,7 +41,7 @@ export default function Weather() {
 
 	useEffect( () => {
 		getWeather();
-	} );
+	}, [ 'query' ] );
 
 	console.table( WeatherContextValue );
 
